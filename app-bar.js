@@ -1,22 +1,3 @@
-/**
- * <app-bar> — Top app bar para uso com @material/web (MD3).
- *
- * Atributos:
- *   titulo           Texto principal
- *   icone-inicial    Nome do Material Symbol do ícone à esquerda (ex.: "menu", "arrow_back")
- *   centralizado     Centraliza o título (variante "center-aligned")
- *   fixa             Fica fixa no topo ao rolar (sticky)
- *   acoes            JSON com os ícones à direita (alternativa à propriedade .acoes)
- *
- * Propriedade:
- *   .acoes = [{ id: 'buscar', icone: 'search', rotulo: 'Buscar' }, ...]
- *
- * Eventos (bubbles + composed):
- *   icone-inicial-click
- *   acao       -> detail: { id, icone, indice }
- *
- * Slots opcionais: "titulo" (substitui o atributo) e "final" (conteúdo extra à direita).
- */
 const tpl = document.createElement('template');
 tpl.innerHTML = `
 <style>
@@ -93,8 +74,7 @@ class AppBar extends HTMLElement {
   }
 
   connectedCallback() {
-    // Se .acoes foi definida antes do componente ser registrado, recupera o valor.
-    if (Object.hasOwn(this, 'acoes')) {
+       if (Object.hasOwn(this, 'acoes')) {
       const valor = this.acoes;
       delete this.acoes;
       this.acoes = valor;
@@ -122,8 +102,7 @@ class AppBar extends HTMLElement {
   }
 
   #atualizarTitulo() {
-    // O slot "titulo" tem prioridade; sem ele, usa o atributo.
-    const slot = this.#raiz.querySelector('slot[name="titulo"]');
+      const slot = this.#raiz.querySelector('slot[name="titulo"]');
     slot.textContent = this.getAttribute('titulo') ?? '';
   }
 
