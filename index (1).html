@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AppBar + Painel Flexível (MD3)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+  <style>
+    body { margin: 0; font-family: Roboto, system-ui, sans-serif;
+           background: var(--md-sys-color-surface, #fef7ff); }
+    .cartao { background: var(--md-sys-color-surface-container, #f3edf7);
+              border-radius: 16px; padding: 8px 0; overflow: hidden; }
+    .cartao h2 { margin: 12px 16px 4px; font-size: 1rem; font-weight: 500; }
+    md-list { background: transparent; }
+  </style>
+
+  <!-- MD3 web components -->
+  <script type="module">
+    import 'https://esm.run/@material/web/all.js';
+  </script>
+  <!-- Componentes novos -->
+  <script type="module" src="./app-bar.js"></script>
+  <script type="module" src="./painel-flexivel.js"></script>
+</head>
+<body>
+  <app-bar id="barra" titulo="Países e curiosidades" icone-inicial="menu" fixa></app-bar>
+
+  <painel-flexivel>
+    <section class="cartao" span="4">
+      <h2>Geografia</h2>
+      <md-list>
+        <md-list-item><div slot="headline">Japão</div><div slot="supporting-text">Tem mais de 6.800 ilhas</div></md-list-item>
+        <md-divider></md-divider>
+        <md-list-item><div slot="headline">Canadá</div><div slot="supporting-text">Possui a maior costa do mundo</div></md-list-item>
+        <md-divider></md-divider>
+        <md-list-item><div slot="headline">Brasil</div><div slot="supporting-text">Maior país da América do Sul</div></md-list-item>
+      </md-list>
+    </section>
+
+    <section class="cartao" span="4">
+      <h2>Bandeiras e capitais</h2>
+      <md-list>
+        <md-list-item><div slot="headline">Nepal</div><div slot="supporting-text">Única bandeira nacional não retangular</div></md-list-item>
+        <md-divider></md-divider>
+        <md-list-item><div slot="headline">Bolívia</div><div slot="supporting-text">Tem duas capitais: La Paz e Sucre</div></md-list-item>
+        <md-divider></md-divider>
+        <md-list-item><div slot="headline">Suíça</div><div slot="supporting-text">Tem quatro idiomas oficiais</div></md-list-item>
+      </md-list>
+    </section>
+
+    <section class="cartao" span="2" span-compacto="2">
+      <h2>Menor país</h2>
+      <md-list><md-list-item><div slot="headline">Vaticano</div><div slot="supporting-text">Cerca de 0,44 km²</div></md-list-item></md-list>
+    </section>
+    <section class="cartao" span="2" span-compacto="2">
+      <h2>Mais ilhas</h2>
+      <md-list><md-list-item><div slot="headline">Suécia</div><div slot="supporting-text">Mais de 260 mil ilhas</div></md-list-item></md-list>
+    </section>
+    <section class="cartao" span="4" span-compacto="4">
+      <h2>Idiomas</h2>
+      <md-list><md-list-item><div slot="headline">Papua-Nova Guiné</div><div slot="supporting-text">Mais de 800 línguas faladas</div></md-list-item></md-list>
+    </section>
+  </painel-flexivel>
+
+  <script>
+    const barra = document.getElementById('barra');
+    barra.acoes = [
+      { id: 'buscar', icone: 'search', rotulo: 'Buscar' },
+      { id: 'filtrar', icone: 'filter_list', rotulo: 'Filtrar' },
+      { id: 'mais', icone: 'more_vert', rotulo: 'Mais opções' },
+    ];
+    barra.addEventListener('icone-inicial-click', () => console.log('menu'));
+    barra.addEventListener('acao', (e) => console.log('ação:', e.detail));
+  </script>
+</body>
+</html>
