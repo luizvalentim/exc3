@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppBar e Painel Flexível</title>
+
+<!-- Ícones Material Symbols (usados pelo <md-icon>) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+
+<style>
+  body { margin: 0; background: #fef7ff; font-family: Roboto, system-ui, sans-serif; }
+  app-bar { position: sticky; top: 0; z-index: 1; }
+  md-filled-card { padding: 16px; min-height: 96px; }
+  h2 { margin: 0 0 4px; font-size: 16px; font-weight: 500; }
+  p  { margin: 0; font-size: 14px; }
+  #status { margin: 16px; font-size: 14px; }
+</style>
+
+<!-- Material Web (MD3) + os dois componentes -->
+<script type="importmap">
+  { "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+</script>
+<script type="module">
+  import '@material/web/all.js';
+  import '@material/web/labs/card/filled-card.js'; // o card fica em "labs"
+  import './app-bar.js';
+  import './flex-panel.js';
+</script>
+</head>
+<body>
+
+<app-bar heading="Meu aplicativo"
+         leading-icon="menu"
+         trailing-icons="search,favorite,more_vert"></app-bar>
+
+<p id="status">Toque em um ícone da barra.</p>
+
+<flex-panel>
+  <md-filled-card span="8"><h2>Cabeçalho</h2><p>Ocupa a largura toda (4 ou 8 colunas).</p></md-filled-card>
+  <md-filled-card span="2"><h2>Card A</h2><p>span 2</p></md-filled-card>
+  <md-filled-card span="2"><h2>Card B</h2><p>span 2</p></md-filled-card>
+  <md-filled-card span="2"><h2>Card C</h2><p>span 2</p></md-filled-card>
+  <md-filled-card span="2"><h2>Card D</h2><p>span 2</p></md-filled-card>
+  <md-filled-card span="4"><h2>Card E</h2><p>span 4 (metade em tela larga)</p></md-filled-card>
+  <md-filled-card span="4"><h2>Card F</h2><p>span 4</p></md-filled-card>
+</flex-panel>
+
+<script>
+  const bar = document.querySelector('app-bar');
+  const status = document.getElementById('status');
+  bar.addEventListener('leading-click', e => status.textContent = 'Ícone à esquerda: ' + e.detail.icon);
+  bar.addEventListener('trailing-click', e => status.textContent = 'Ícone à direita: ' + e.detail.icon);
+</script>
+</body>
+</html>
